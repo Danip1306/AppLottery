@@ -47,7 +47,7 @@ fun DetalleRifaScreen(rifaId: Int, onNavigateBack: () -> Unit) {
         ) {
             rifaDetalle?.let {
                 Text("Nombre: ${it.nombre}", style = MaterialTheme.typography.headlineSmall)
-                Text("Descripción: (Aquí iría la descripción)", style = MaterialTheme.typography.bodyLarge)
+                Text("Descripción: ${it.descripcion}", style = MaterialTheme.typography.bodyLarge) // Mostramos la descripción
                 Text("Precio por boleto: $${it.valorUnitario}", style = MaterialTheme.typography.bodyMedium)
                 Text("Total de boletos: ${it.cantidadBoletos}", style = MaterialTheme.typography.bodyMedium)
                 val sdf = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())

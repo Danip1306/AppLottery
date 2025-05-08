@@ -40,11 +40,12 @@ class RifaViewModel(private val rifaPreferences: RifaPreferences) : ViewModel() 
         }
     }
 
-    fun insertarRifa(nombre: String, cantidadBoletos: Int, valorUnitario: Double, fechaSorteo: Long) {
+    fun insertarRifa(nombre: String, descripcion: String, cantidadBoletos: Int, valorUnitario: Double, fechaSorteo: Long) {
         viewModelScope.launch {
             val nuevaRifa = Rifa(
                 id = generarIdUnico(), // Generamos un ID único temporal
                 nombre = nombre,
+                descripcion = descripcion, // Guardamos la descripción
                 cantidadBoletos = cantidadBoletos,
                 valorUnitario = valorUnitario,
                 fechaSorteo = fechaSorteo

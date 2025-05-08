@@ -91,6 +91,7 @@ fun AñadirRifaScreen(onNavigateBack: () -> Unit) {
                     if (nombreRifa.isNotBlank() && precio > 0 && boletos > 0 && fechaSorteo.isNotBlank()) {
                         viewModel.insertarRifa(
                             nombre = nombreRifa,
+                            descripcion = descripcion, // Pasamos la descripción
                             cantidadBoletos = boletos,
                             valorUnitario = precio,
                             fechaSorteo = parsedDate
