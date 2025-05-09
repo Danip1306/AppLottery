@@ -1,10 +1,10 @@
 package com.example.lottery.data.model
 
 data class Rifa(
-    val id: Int, // Lo generaremos nosotros temporalmente
+    val id: Int,
     val nombre: String,
-    val descripcion: String, // Añadimos el campo descripción
+    val descripcion: String,
     val cantidadBoletos: Int,
     val valorUnitario: Double,
-    val fechaSorteo: Long // Timestamp de la fecha del sorteo (milisegundos desde Epoch)
+    val fechaSorteo: Long
 )

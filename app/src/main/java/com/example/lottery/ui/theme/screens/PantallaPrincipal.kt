@@ -25,6 +25,7 @@ import java.util.Locale
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PantallaPrincipal(onNavigateToDetalle: (Int) -> Unit, onNavigateToAddRifa: () -> Unit) {
+    // Pantalla principal que muestra la lista de rifas y opciones para interactuar con ellas.
     val context = LocalContext.current
     val viewModel: RifaViewModel = viewModel(factory = RifaViewModel.RifaViewModelFactory(context))
     val rifas by viewModel.rifas.collectAsState()
@@ -33,12 +34,12 @@ fun PantallaPrincipal(onNavigateToDetalle: (Int) -> Unit, onNavigateToAddRifa: (
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
-                title = { Text("Mis Rifas") }
+                title = { Text("Mis Rifas") } // Barra de título de la aplicación.
             )
         },
         floatingActionButton = {
             FloatingActionButton(onClick = onNavigateToAddRifa) {
-                Icon(Icons.Filled.Add, "Añadir Rifa")
+                Icon(Icons.Filled.Add, "Añadir Rifa") // Botón flotante para añadir una nueva rifa.
             }
         }
     ) { paddingValues ->
@@ -50,20 +51,20 @@ fun PantallaPrincipal(onNavigateToDetalle: (Int) -> Unit, onNavigateToAddRifa: (
         ) {
             OutlinedTextField(
                 value = searchText,
-                onValueChange = viewModel::actualizarTextoBusqueda,
-                leadingIcon = { Icon(Icons.Filled.Search, contentDescription = "Buscar") },
-                label = { Text("Buscar rifa...") },
+                onValueChange = viewModel::actualizarTextoBusqueda, // Actualiza el texto de búsqueda en el ViewModel.
+                leadingIcon = { Icon(Icons.Filled.Search, contentDescription = "Buscar") }, // Icono de búsqueda.
+                label = { Text("Buscar rifa...") }, // Etiqueta del campo de búsqueda.
                 modifier = Modifier.fillMaxWidth()
             )
             Spacer(modifier = Modifier.height(16.dp))
 
             if (rifas.isEmpty()) {
-                Text("No hay rifas creadas.", style = MaterialTheme.typography.bodyMedium)
+                Text("No hay rifas creadas.", style = MaterialTheme.typography.bodyMedium) // Mensaje si no hay rifas creadas.
             } else {
                 LazyColumn {
                     items(rifas) { rifa ->
-                        RifaItem(rifa = rifa, onClick = { onNavigateToDetalle(rifa.id) })
-                        Divider()
+                        RifaItem(rifa = rifa, onClick = { onNavigateToDetalle(rifa.id) }) // Muestra cada elemento de la rifa.
+                        Divider() // Línea divisoria entre elementos.
                     }
                 }
             }
@@ -73,25 +74,26 @@ fun PantallaPrincipal(onNavigateToDetalle: (Int) -> Unit, onNavigateToAddRifa: (
 
 @Composable
 fun RifaItem(rifa: Rifa, onClick: () -> Unit) {
+    // Elemento individual que representa una rifa en la lista.
     Row(
         modifier = Modifier
             .fillMaxWidth()
             .padding(vertical = 8.dp)
-            .clickable(onClick = onClick),
+            .clickable(onClick = onClick), // Permite hacer clic en el elemento.
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
         Column {
-            Text(rifa.nombre, style = MaterialTheme.typography.titleMedium)
-            Text("${rifa.cantidadBoletos} boletos - $${rifa.valorUnitario} c/u", style = MaterialTheme.typography.bodySmall)
+            Text(rifa.nombre, style = MaterialTheme.typography.titleMedium) // Nombre de la rifa.
+            Text("${rifa.cantidadBoletos} boletos - $${rifa.valorUnitario} c/u", style = MaterialTheme.typography.bodySmall) // Detalles de los boletos.
             val sdf = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
             val fechaSorteo = Date(rifa.fechaSorteo)
-            Text("Sorteo: ${sdf.format(fechaSorteo)}", style = MaterialTheme.typography.bodySmall)
+            Text("Sorteo: ${sdf.format(fechaSorteo)}", style = MaterialTheme.typography.bodySmall) // Fecha del sorteo.
         }
         Icon(
             painter = painterResource(id = R.drawable.ic_arrow_right),
             contentDescription = "Ver detalles",
             modifier = Modifier.size(24.dp)
-        )
+        ) // Icono para indicar que se pueden ver los detalles.
     }
 }
